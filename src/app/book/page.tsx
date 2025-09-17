@@ -1,12 +1,23 @@
 import Link from "next/link";
 import { BrokerHeader } from "@/components/broker-header";
+import { headers } from "next/headers";
 
-export default function BookPage() {
-  const clients = [
-    { id: 1, name: "Client A", company: "Acme Corp", lastCall: "2 days ago" },
-    { id: 2, name: "Client B", company: "Beta LLC", lastCall: "5 days ago" },
-    { id: 3, name: "Client C", company: "Cypher Inc", lastCall: "1 week ago" },
-  ];
+function formatLastCall(lastCallAt: number | null): string {
+  if (!lastCallAt) return "No recent calls";
+  const diffMs = Date.now() - lastCallAt;
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  if (diffDays <= 0) return "Today";
+  if (diffDays === 1) return "1 day ago";
+  if (diffDays < 7) return `${diffDays} days ago`;
+  const diffWeeks = Math.floor(diffDays / 7);
+  return diffWeeks === 1 ? "1 week ago" : `${diffWeeks} weeks ago`;
+}
+
+export default async function BookPage() {
+  const host = headers().get("host") || "localhost:3000";
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const res = await fetch(`${protocol}://${host}/api/clients`, { cache: "no-store" });
+  const clients: { id: number; name: string; company: string; lastCallAt: number | null }[] = res.ok ? await res.json() : [];
 
   return (
     <>
@@ -26,7 +37,7 @@ export default function BookPage() {
                 </Link>
                 <span className="text-xs text-muted-foreground">{c.company}</span>
               </div>
-              <div className="text-sm text-muted-foreground">Last call: {c.lastCall}</div>
+              <div className="text-sm text-muted-foreground">Last call: {formatLastCall(c.lastCallAt)}</div>
               <div className="flex gap-2 pt-2">
                 <Link href={`/client/${c.id}`} className="inline-flex items-center rounded-md border px-3 py-1.5 text-xs hover:bg-accent">
                   View Client
