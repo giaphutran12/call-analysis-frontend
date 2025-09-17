@@ -74,21 +74,21 @@ export default function PipelinePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-secondary">
       <BrokerHeader />
       <div className="flex-1 p-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Active Pipeline</h2>
-              <p className="text-gray-600 mt-1">Track your deals from application to funding • $2.1M in progress</p>
+              <h2 className="text-2xl font-bold text-foreground">Active Pipeline</h2>
+              <p className="text-muted-foreground mt-1">Track your deals from application to funding • $2.1M in progress</p>
             </div>
             <div className="flex gap-3">
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2">
+              <button className="px-4 py-2 rounded-lg border border-input bg-secondary hover:bg-accent transition-colors flex items-center gap-2 text-foreground">
                 <Filter className="w-4 h-4" />
                 Filter
               </button>
-              <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2">
+              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
                 <BarChart3 className="w-4 h-4" />
                 Analytics
               </button>
@@ -97,85 +97,75 @@ export default function PipelinePage() {
 
           <div className="grid grid-cols-5 gap-4 mb-6">
             {overview.map((o) => (
-              <div key={o.label} className={`rounded-xl p-4 border bg-${o.color}-50 border-${o.color}-200`}>
+              <div key={o.label} className="rounded-xl p-4 border border-border bg-card">
                 <div className="text-center">
-                  <div className={`text-2xl font-bold text-${o.color}-600`}>{o.count}</div>
-                  <div className={`text-sm text-${o.color}-700`}>{o.label}</div>
-                  <div className={`text-xs text-${o.color}-600 mt-1`}>{o.amount}</div>
+                  <div className="text-2xl font-semibold text-foreground">{o.count}</div>
+                  <div className="text-sm text-muted-foreground">{o.label}</div>
+                  <div className="text-xs text-foreground/70 mt-1">{o.amount}</div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div className="p-4 border-b border-gray-100">
-              <h3 className="text-lg font-semibold text-gray-900">Active Deals</h3>
+          <div className="bg-card rounded-xl border border-border overflow-hidden">
+            <div className="p-4 border-b border-border/60">
+              <h3 className="text-lg font-semibold text-foreground">Active Deals</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-secondary border-b border-border">
                   <tr>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Client</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Amount</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Property</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Stage</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Days Active</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Next Action</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Actions</th>
+                    <th className="text-left py-3 px-4 font-medium text-foreground/80">Client</th>
+                    <th className="text-left py-3 px-4 font-medium text-foreground/80">Amount</th>
+                    <th className="text-left py-3 px-4 font-medium text-foreground/80">Property</th>
+                    <th className="text-left py-3 px-4 font-medium text-foreground/80">Stage</th>
+                    <th className="text-left py-3 px-4 font-medium text-foreground/80">Days Active</th>
+                    <th className="text-left py-3 px-4 font-medium text-foreground/80">Next Action</th>
+                    <th className="text-left py-3 px-4 font-medium text-foreground/80">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-border">
                   {deals.map((deal, idx) => (
-                    <tr key={idx} className="hover:bg-gray-50">
+                    <tr key={idx} className="hover:bg-secondary transition-colors">
                       <td className="py-4 px-4">
-                        <div className="font-medium text-gray-900">{deal.client}</div>
+                        <div className="font-medium text-foreground">{deal.client}</div>
                       </td>
                       <td className="py-4 px-4">
-                        <div className="font-semibold text-green-600">{deal.amount}</div>
+                        <div className="font-semibold text-foreground">{deal.amount}</div>
                       </td>
                       <td className="py-4 px-4">
-                        <div className="text-sm text-gray-700">{deal.property}</div>
+                        <div className="text-sm text-muted-foreground">{deal.property}</div>
                       </td>
                       <td className="py-4 px-4">
                         <span
-                          className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            deal.stageColor === "blue"
-                              ? "bg-blue-100 text-blue-700"
-                              : deal.stageColor === "yellow"
-                              ? "bg-yellow-100 text-yellow-700"
-                              : deal.stageColor === "purple"
-                              ? "bg-purple-100 text-purple-700"
-                              : deal.stageColor === "orange"
-                              ? "bg-orange-100 text-orange-700"
-                              : "bg-green-100 text-green-700"
-                          }`}
+                          className={"px-3 py-1 rounded-full text-xs font-medium bg-secondary text-foreground"}
                         >
                           {deal.stage}
                         </span>
                       </td>
                       <td className="py-4 px-4">
-                        <div className="text-sm text-gray-600">{deal.daysActive} days</div>
+                        <div className="text-sm text-muted-foreground">{deal.daysActive} days</div>
                       </td>
                       <td className="py-4 px-4">
                         <div className="flex items-center gap-2">
                           <span
                             className={`w-2 h-2 rounded-full ${
                               deal.priority === "urgent"
-                                ? "bg-red-500"
+                                ? "bg-destructive"
                                 : deal.priority === "high"
-                                ? "bg-yellow-500"
-                                : "bg-green-500"
+                                ? "bg-primary"
+                                : "bg-muted-foreground"
                             }`}
                           />
-                          <span className="text-sm text-gray-700">{deal.nextAction}</span>
+                          <span className="text-sm text-foreground">{deal.nextAction}</span>
                         </div>
                       </td>
                       <td className="py-4 px-4">
                         <div className="flex gap-2">
-                          <button className="p-2 text-blue-600 hover:bg-blue-50 rounded">
+                          <button className="p-2 text-primary hover:bg-secondary rounded transition-colors">
                             <FileText className="w-4 h-4" />
                           </button>
-                          <button className="p-2 text-green-600 hover:bg-green-50 rounded">
+                          <button className="p-2 text-primary hover:bg-secondary rounded transition-colors">
                             <Phone className="w-4 h-4" />
                           </button>
                         </div>
