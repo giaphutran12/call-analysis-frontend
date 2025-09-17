@@ -436,7 +436,7 @@ export const CallIntelligenceDashboard: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-3 pt-3 border-t border">
+                <div className="flex items-center justify-between mt-3 pt-3">
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-muted-foreground">Next:</span>
                     <span className="text-sm font-medium text-foreground">
