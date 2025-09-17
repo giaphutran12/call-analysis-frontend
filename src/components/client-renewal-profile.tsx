@@ -31,6 +31,8 @@ export const ClientRenewalProfile: React.FC = () => {
     opportunities: true,
     talkingPoints: true,
   });
+  const [showCallsPanel, setShowCallsPanel] = useState(false);
+  const [selectedCallId, setSelectedCallId] = useState<number | null>(null);
 
   const toggleSection = (section: keyof typeof expandedSections) => {
     setExpandedSections((prev) => ({
@@ -194,6 +196,12 @@ export const ClientRenewalProfile: React.FC = () => {
     },
   } as const;
 
+  const calls = [
+    { id: 201, date: "2025-09-10", duration: "32m", sentiment: "Positive", title: "Pilot kickoff & next steps" },
+    { id: 202, date: "2025-09-05", duration: "18m", sentiment: "Neutral", title: "Pricing tiers & deployment" },
+    { id: 203, date: "2025-08-30", duration: "42m", sentiment: "Risk", title: "Legal review & security" },
+  ];
+
   const renewalUrgency =
     clientData.currentMortgage.daysUntilRenewal <= 60
       ? "high"
@@ -237,6 +245,16 @@ export const ClientRenewalProfile: React.FC = () => {
               </div>
             </div>
             <div className="flex gap-2">
+              <button
+                onClick={() => {
+                  setShowCallsPanel(true);
+                  setSelectedCallId(calls[0]?.id ?? null);
+                }}
+                className="px-4 py-2 border border-blue-200 text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg flex items-center gap-2"
+              >
+                <FileText className="w-4 h-4" />
+                Previous Calls' Analysis
+              </button>
               <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2">
                 <Phone className="w-4 h-4" />
                 Call Now
@@ -280,6 +298,121 @@ export const ClientRenewalProfile: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {showCallsPanel && (
+        <div className="fixed inset-0 z-50">
+          <div
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setShowCallsPanel(false)}
+          />
+          <div className="absolute right-0 top-0 h-full w-full max-w-5xl bg-white shadow-xl flex flex-col">
+            <div className="flex items-center justify-between border-b px-6 py-4">
+              <div>
+                <h2 className="text-xl font-semibold">Call recordings & analysis</h2>
+                <p className="text-sm text-gray-600">Client: {clientData.name}</p>
+              </div>
+              <button
+                onClick={() => setShowCallsPanel(false)}
+                className="px-3 py-1.5 text-sm rounded-md border hover:bg-gray-50"
+              >
+                Close
+              </button>
+            </div>
+            <div className="flex flex-1 overflow-hidden">
+              <aside className="w-80 border-r overflow-y-auto">
+                <div className="p-3 border-b text-sm font-medium text-gray-700">Previous Calls</div>
+                <div className="divide-y">
+                  {calls.map((c) => (
+                    <button
+                      key={c.id}
+                      onClick={() => setSelectedCallId(c.id)}
+                      className={`w-full text-left p-4 hover:bg-gray-50 ${
+                        selectedCallId === c.id ? "bg-blue-50" : ""
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="text-sm font-medium text-gray-900">{c.date} • {c.duration}</div>
+                        <span className="text-xs px-2 py-0.5 rounded-md border">{c.sentiment}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 mt-1 line-clamp-1">{c.title}</div>
+                    </button>
+                  ))}
+                </div>
+              </aside>
+
+              <section className="flex-1 overflow-y-auto">
+                <div className="p-6 space-y-6">
+                  {(() => {
+                    const active = calls.find((x) => x.id === selectedCallId);
+                    if (!active) return null;
+                    return (
+                      <>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h3 className="text-lg font-semibold">{active.title}</h3>
+                            <p className="text-sm text-gray-600">{active.date} • {active.duration} • Sentiment: {active.sentiment}</p>
+                          </div>
+                          <div className="flex gap-2">
+                            <button className="px-3 py-1.5 text-sm rounded-md border hover:bg-gray-50 flex items-center gap-2">
+                              <FileText className="w-4 h-4" /> Transcript
+                            </button>
+                            <button className="px-3 py-1.5 text-sm rounded-md border hover:bg-gray-50 flex items-center gap-2">
+                              <Target className="w-4 h-4" /> Insights
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg border bg-gray-50 p-4">
+                          <div className="h-16 bg-gradient-to-r from-blue-100 to-purple-100 rounded-md"></div>
+                          <div className="mt-2 text-xs text-gray-600">Audio waveform placeholder</div>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-4">
+                          <div className="rounded-lg border p-4">
+                            <div className="text-xs text-gray-600">Overall Sentiment</div>
+                            <div className="text-lg font-semibold mt-1">{active.sentiment}</div>
+                          </div>
+                          <div className="rounded-lg border p-4">
+                            <div className="text-xs text-gray-600">Key Topics</div>
+                            <ul className="mt-2 text-sm text-gray-700 list-disc list-inside space-y-1">
+                              <li>Renewal strategy discussion</li>
+                              <li>Rate options comparison</li>
+                              <li>Next-step commitments</li>
+                            </ul>
+                          </div>
+                          <div className="rounded-lg border p-4">
+                            <div className="text-xs text-gray-600">Action Items</div>
+                            <ul className="mt-2 text-sm text-gray-700 list-disc list-inside space-y-1">
+                              <li>Send updated proposal</li>
+                              <li>Schedule appraisal</li>
+                              <li>Prepare consolidation plan</li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg border">
+                          <div className="px-4 py-3 border-b font-medium">Transcript Highlights</div>
+                          <div className="p-4 space-y-3 text-sm text-gray-700">
+                            <p>
+                              Broker: "Based on your current rate, we can save about $180/month with a blend & extend."
+                            </p>
+                            <p>
+                              Client: "We want to understand penalties and portability in case we move next year."
+                            </p>
+                            <p>
+                              Broker: "I'll include that in the proposal and outline consolidation options as well."
+                            </p>
+                          </div>
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto p-6">
         <div className="grid grid-cols-3 gap-6">
