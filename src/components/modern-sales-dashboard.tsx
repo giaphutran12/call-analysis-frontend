@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from 'react';
 import { Phone, Calendar, DollarSign, Users, ChevronRight, Search, MessageSquare, Trophy, Flame, ArrowUp, ArrowDown, Award, FileText } from 'lucide-react';
@@ -59,55 +59,55 @@ export const ModernSalesDashboard: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <BrokerHeader />
 
       {/* Personal Progress Bar */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3">
+      <div className="bg-primary text-primary-foreground px-6 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
             <div className="text-sm">
-              <div className="text-blue-100 text-xs">Your Progress Today</div>
+              <div className="text-primary-foreground/80 text-xs">Your Progress Today</div>
               <div className="flex items-center gap-4 mt-1">
                 <span className="flex items-center gap-1">
                   <span className="font-semibold">{personalProgress.current.applications}</span>
-                  <span className="text-xs text-blue-200">apps</span>
+                  <span className="text-xs text-primary-foreground/70">apps</span>
                   {personalProgress.current.applications > personalProgress.lastWeek.applications && (
-                    <ArrowUp className="w-3 h-3 text-green-300" />
+                    <ArrowUp className="w-3 h-3 text-primary-foreground/80" />
                   )}
                 </span>
-                <span className="text-blue-300">•</span>
+                <span className="text-primary-foreground/60">•</span>
                 <span className="flex items-center gap-1">
                   <span className="font-semibold">{personalProgress.current.appraisals}</span>
-                  <span className="text-xs text-blue-200">appraisals</span>
+                  <span className="text-xs text-primary-foreground/70">appraisals</span>
                 </span>
-                <span className="text-blue-300">•</span>
+                <span className="text-primary-foreground/60">•</span>
                 <span className="flex items-center gap-1">
                   <span className="font-semibold">{personalProgress.current.docsComplete}%</span>
-                  <span className="text-xs text-blue-200">docs</span>
+                  <span className="text-xs text-primary-foreground/70">docs</span>
                 </span>
-                <span className="text-blue-300">•</span>
+                <span className="text-primary-foreground/60">•</span>
                 <span className="flex items-center gap-1">
                   <span className="font-semibold">{personalProgress.current.approvals}</span>
-                  <span className="text-xs text-blue-200">approvals</span>
+                  <span className="text-xs text-primary-foreground/70">approvals</span>
                 </span>
               </div>
             </div>
           </div>
           <div className="flex items-center gap-4 text-sm">
             <div>
-              <div className="text-xs text-blue-200">Personal Best</div>
+              <div className="text-xs text-primary-foreground/70">Personal Best</div>
               <div className="flex items-center gap-1">
-                <Trophy className="w-3 h-3 text-yellow-300" />
+                <Trophy className="w-3 h-3 text-primary-foreground/80" />
                 <span>{personalProgress.personalBest.applications} apps/day</span>
               </div>
             </div>
             <div>
-              <div className="text-xs text-blue-200">Month Progress</div>
+              <div className="text-xs text-primary-foreground/70">Month Progress</div>
               <div className="flex items-center gap-2">
-                <div className="w-24 bg-blue-800 rounded-full h-2">
+                <div className="w-24 bg-primary/40 rounded-full h-2">
                   <div
-                    className="bg-green-400 h-2 rounded-full"
+                    className="bg-primary-foreground h-2 rounded-full"
                     style={{ width: `${(personalProgress.currentProgress.applications / personalProgress.monthlyGoal.applications) * 100}%` }}
                   />
                 </div>
@@ -120,35 +120,35 @@ export const ModernSalesDashboard: React.FC = () => {
 
       {/* Team Competition View */}
       {showTeamView && (
-        <div className="bg-purple-50 border-b border-purple-200 px-6 py-4">
+        <div className="bg-accent border-b px-6 py-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-purple-900">Team Standings - This Week</h3>
-            <button className="text-sm text-purple-600 hover:text-purple-700">View Details →</button>
+            <h3 className="font-semibold text-foreground">Team Standings - This Week</h3>
+            <button className="text-sm text-primary hover:opacity-90">View Details →</button>
           </div>
           <div className="grid grid-cols-4 gap-4">
             {teamStandings.map((team) => (
-              <div key={team.name} className={`bg-white rounded-lg p-3 border-2 ${team.isYours ? 'border-purple-400' : 'border-gray-200'}`}>
+              <div key={team.name} className={`bg-card rounded-lg p-3 border-2 ${team.isYours ? 'border' : 'border'}`}>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <span className={`text-lg font-bold ${team.rank === 1 ? 'text-yellow-600' : team.rank === 2 ? 'text-gray-500' : team.rank === 3 ? 'text-orange-600' : 'text-gray-400'}`}>#{team.rank}</span>
-                    <span className="font-medium text-gray-900 text-sm">{team.name}</span>
+                    <span className={`text-lg font-bold text-muted-foreground`}>#{team.rank}</span>
+                    <span className="font-medium text-foreground text-sm">{team.name}</span>
                   </div>
-                  {team.trend === 'up' && <ArrowUp className="w-4 h-4 text-green-600" />}
-                  {team.trend === 'down' && <ArrowDown className="w-4 h-4 text-red-600" />}
+                  {team.trend === 'up' && <ArrowUp className="w-4 h-4 text-foreground" />}
+                  {team.trend === 'down' && <ArrowDown className="w-4 h-4 text-destructive" />}
                 </div>
                 <div className="space-y-1 text-xs">
-                  <div className="flex justify-between"><span className="text-gray-600">Apps:</span><span className="font-medium">{team.stats.applications}</span></div>
-                  <div className="flex justify-between"><span className="text-gray-600">Approvals:</span><span className="font-medium">{team.stats.approvals}</span></div>
-                  <div className="flex justify-between"><span className="text-gray-600">Docs:</span><span className="font-medium">{team.stats.docsComplete}%</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Apps:</span><span className="font-medium">{team.stats.applications}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Approvals:</span><span className="font-medium">{team.stats.approvals}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Docs:</span><span className="font-medium">{team.stats.docsComplete}%</span></div>
                 </div>
-                {team.isYours && <div className="mt-2 pt-2 border-t border-purple-200 text-xs text-purple-600 font-medium">Your Team</div>}
+                {team.isYours && <div className="mt-2 pt-2 border-t text-xs text-primary font-medium">Your Team</div>}
               </div>
             ))}
           </div>
           <div className="flex items-center justify-center gap-4 mt-3 text-sm">
-            <span className="text-purple-700">🎯 Team Goal: Beat last week's 62 applications</span>
-            <span className="text-purple-700">•</span>
-            <span className="text-purple-700">Current: 58/62 (94%)</span>
+            <span className="text-foreground">🎯 Team Goal: Beat last week's 62 applications</span>
+            <span className="text-muted-foreground">•</span>
+            <span className="text-foreground">Current: 58/62 (94%)</span>
           </div>
         </div>
       )}
@@ -160,37 +160,37 @@ export const ModernSalesDashboard: React.FC = () => {
           <div className="col-span-2 space-y-4">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900">What needs your attention today</h2>
-                <span className="text-sm text-gray-600">{todaysTasks.filter((t) => t.priority === 'urgent').length} urgent items</span>
+                <h2 className="text-xl font-semibold text-foreground">What needs your attention today</h2>
+                <span className="text-sm text-muted-foreground">{todaysTasks.filter((t) => t.priority === 'urgent').length} urgent items</span>
               </div>
               <div className="space-y-3">
                 {todaysTasks.map((task) => (
-                  <div key={task.id} className={`bg-white rounded-lg border ${task.priority === 'urgent' ? 'border-red-200' : 'border-gray-200'} p-4 hover:shadow-md transition-shadow`}>
+                  <div key={task.id} className={`bg-card rounded-lg border p-4 hover:shadow-md transition-shadow`}>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <span className={`px-2 py-1 rounded text-xs font-medium ${task.priority === 'urgent' ? 'bg-red-100 text-red-700' : task.priority === 'high' ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-700'}`}>{task.priority}</span>
-                          <span className={`px-2 py-1 rounded text-xs ${task.type === 'follow-up' ? 'bg-blue-100 text-blue-700' : task.type === 'pipeline' ? 'bg-purple-100 text-purple-700' : 'bg-green-100 text-green-700'}`}>{task.type}</span>
-                          {task.hotPotato && <span className="text-xs text-gray-600">Hot Potato: <span className="font-medium">{task.hotPotato}</span></span>}
+                          <span className={`px-2 py-1 rounded text-xs font-medium bg-accent text-foreground`}>{task.priority}</span>
+                          <span className={`px-2 py-1 rounded text-xs bg-accent text-foreground`}>{task.type}</span>
+                          {task.hotPotato && <span className="text-xs text-muted-foreground">Hot Potato: <span className="font-medium">{task.hotPotato}</span></span>}
                         </div>
-                        <h3 className="font-semibold text-gray-900 mb-1">{task.contact}</h3>
-                        <p className="text-sm text-gray-700 mb-2">{task.action}</p>
-                        <p className="text-xs text-gray-500">{task.reason}</p>
+                        <h3 className="font-semibold text-foreground mb-1">{task.contact}</h3>
+                        <p className="text-sm text-muted-foreground mb-2">{task.action}</p>
+                        <p className="text-xs text-muted-foreground">{task.reason}</p>
                         {task.competitiveNote && (
-                          <p className="text-xs text-purple-600 mt-2 flex items-center gap-1">
+                          <p className="text-xs text-primary mt-2 flex items-center gap-1">
                             <Flame className="w-3 h-3" />
                             {task.competitiveNote}
                           </p>
                         )}
                       </div>
                       <div className="text-right ml-4">
-                        {task.amount && <div className="text-lg font-semibold text-gray-900">{task.amount}</div>}
-                        {task.stage && <div className="text-xs text-gray-600">{task.stage}</div>}
+                        {task.amount && <div className="text-lg font-semibold text-foreground">{task.amount}</div>}
+                        {task.stage && <div className="text-xs text-muted-foreground">{task.stage}</div>}
                         <div className="flex gap-2 mt-3">
                           {task.phone && (
-                            <button className="p-2 bg-green-600 text-white rounded hover:bg-green-700"><Phone className="w-4 h-4" /></button>
+                            <button className="p-2 bg-primary text-primary-foreground rounded hover:opacity-90"><Phone className="w-4 h-4" /></button>
                           )}
-                          <button className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"><MessageSquare className="w-4 h-4" /></button>
+                          <button className="p-2 bg-primary text-primary-foreground rounded hover:opacity-90"><MessageSquare className="w-4 h-4" /></button>
                         </div>
                       </div>
                     </div>
@@ -200,25 +200,25 @@ export const ModernSalesDashboard: React.FC = () => {
             </div>
 
             {/* Achievements */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Today's Achievements</h3>
+            <div className="bg-card rounded-lg border p-4">
+              <h3 className="font-semibold text-foreground mb-3">Today's Achievements</h3>
               <div className="space-y-3">
                 {achievements.map((a) => {
                   const Icon = a.icon as React.ElementType;
                   return (
                     <div key={a.id} className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-purple-600" />
+                      <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-primary" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-sm font-medium text-gray-900">{a.name}</span>
-                          <span className="text-xs text-gray-600">{a.progress}%</span>
+                          <span className="text-sm font-medium text-foreground">{a.name}</span>
+                          <span className="text-xs text-muted-foreground">{a.progress}%</span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <div className="bg-purple-600 h-2 rounded-full transition-all duration-300" style={{ width: `${a.progress}%` }} />
+                        <div className="w-full bg-muted rounded-full h-2">
+                          <div className="bg-primary h-2 rounded-full transition-all duration-300" style={{ width: `${a.progress}%` }} />
                         </div>
-                        <p className="text-xs text-gray-500 mt-1">{a.description}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{a.description}</p>
                       </div>
                     </div>
                   );
@@ -229,90 +229,87 @@ export const ModernSalesDashboard: React.FC = () => {
 
           {/* Right: Insights and Quick actions */}
           <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">You vs You</h3>
+            <div className="bg-card rounded-lg border p-4">
+              <h3 className="font-semibold text-foreground mb-3">You vs You</h3>
               <div className="space-y-3">
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm text-gray-600">Applications</span>
+                    <span className="text-sm text-muted-foreground">Applications</span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium">{personalProgress.current.applications}</span>
-                      <span className={`text-xs ${personalProgress.current.applications > personalProgress.lastWeek.applications ? 'text-green-600' : 'text-red-600'}`}>vs {personalProgress.lastWeek.applications} last week</span>
+                      <span className={`text-xs ${personalProgress.current.applications > personalProgress.lastWeek.applications ? 'text-foreground' : 'text-destructive'}`}>vs {personalProgress.lastWeek.applications} last week</span>
                   </div></div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className={`h-2 rounded-full ${personalProgress.current.applications > personalProgress.lastWeek.applications ? 'bg-green-600' : 'bg-gray-400'}`} style={{ width: `${(personalProgress.current.applications / personalProgress.personalBest.applications) * 100}%` }} />
+                  <div className="w-full bg-muted rounded-full h-2">
+                    <div className={`h-2 rounded-full ${personalProgress.current.applications > personalProgress.lastWeek.applications ? 'bg-primary' : 'bg-muted-foreground'}`} style={{ width: `${(personalProgress.current.applications / personalProgress.personalBest.applications) * 100}%` }} />
                   </div>
                 </div>
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm text-gray-600">Approvals</span>
+                    <span className="text-sm text-muted-foreground">Approvals</span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium">{personalProgress.current.approvals}</span>
-                      <span className={`text-xs ${personalProgress.current.approvals > personalProgress.lastWeek.approvals ? 'text-green-600' : 'text-red-600'}`}>vs {personalProgress.lastWeek.approvals} last week</span>
+                      <span className={`text-xs ${personalProgress.current.approvals > personalProgress.lastWeek.approvals ? 'text-foreground' : 'text-destructive'}`}>vs {personalProgress.lastWeek.approvals} last week</span>
                   </div></div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className={`h-2 rounded-full ${personalProgress.current.approvals > personalProgress.lastWeek.approvals ? 'bg-green-600' : 'bg-gray-400'}`} style={{ width: `${(personalProgress.current.approvals / personalProgress.personalBest.approvals) * 100}%` }} />
+                  <div className="w-full bg-muted rounded-full h-2">
+                    <div className={`h-2 rounded-full ${personalProgress.current.approvals > personalProgress.lastWeek.approvals ? 'bg-primary' : 'bg-muted-foreground'}`} style={{ width: `${(personalProgress.current.approvals / personalProgress.personalBest.approvals) * 100}%` }} />
                   </div>
                 </div>
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm text-gray-600">Document Completion</span>
+                    <span className="text-sm text-muted-foreground">Document Completion</span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium">{personalProgress.current.docsComplete}%</span>
-                      <span className={`text-xs ${personalProgress.current.docsComplete > personalProgress.lastWeek.docsComplete ? 'text-green-600' : 'text-red-600'}`}>vs {personalProgress.lastWeek.docsComplete}% last week</span>
+                      <span className={`text-xs ${personalProgress.current.docsComplete > personalProgress.lastWeek.docsComplete ? 'text-foreground' : 'text-destructive'}`}>vs {personalProgress.lastWeek.docsComplete}% last week</span>
                   </div></div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className={`h-2 rounded-full ${personalProgress.current.docsComplete >= 80 ? 'bg-green-600' : 'bg-yellow-600'}`} style={{ width: `${personalProgress.current.docsComplete}%` }} />
+                  <div className="w-full bg-muted rounded-full h-2">
+                    <div className={`h-2 rounded-full ${personalProgress.current.docsComplete >= 80 ? 'bg-primary' : 'bg-muted-foreground'}`} style={{ width: `${personalProgress.current.docsComplete}%` }} />
                   </div>
                 </div>
               </div>
-              <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                <p className="text-xs text-blue-800"><strong>Focus:</strong> You're {personalProgress.personalBest.applications - personalProgress.current.applications} apps away from your personal best!</p>
+              <div className="mt-4 p-3 bg-accent rounded-lg">
+                <p className="text-xs text-foreground"><strong>Focus:</strong> You're {personalProgress.personalBest.applications - personalProgress.current.applications} apps away from your personal best!</p>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Quick Actions</h3>
+            <div className="bg-card rounded-lg border p-4">
+              <h3 className="font-semibold text-foreground mb-3">Quick Actions</h3>
               <div className="space-y-2">
-                <button className="w-full text-left p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors">
+                <button className="w-full text-left p-3 rounded-lg bg-accent hover:opacity-90 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-green-600" />
+                      <Phone className="w-5 h-5 text-primary" />
                       <div>
                         <div className="font-medium text-sm">Start Call Session</div>
-                        <div className="text-xs text-gray-600">5 leads waiting</div>
+                        <div className="text-xs text-muted-foreground">5 leads waiting</div>
                       </div>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
                   </div>
                 </button>
-                <button className="w-full text-left p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors">
+                <button className="w-full text-left p-3 rounded-lg bg-accent hover:opacity-90 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <FileText className="w-5 h-5 text-blue-600" />
+                      <FileText className="w-5 h-5 text-primary" />
                       <div>
                         <div className="font-medium text-sm">Check Documents</div>
-                        <div className="text-xs text-gray-600">3 pending review</div>
+                        <div className="text-xs text-muted-foreground">3 pending review</div>
                       </div>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
                   </div>
                 </button>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg p-4">
-              <p className="text-sm text-gray-800 italic">"The only person you should try to be better than is the person you were yesterday."</p>
-              <p className="text-xs text-gray-600 mt-2">- Your best self is waiting</p>
-            </div>
+            {/* Placeholder for other tabs */}
+            {/* ... keep existing code ... */}
           </div>
         </div>
       )}
 
-      {/* Placeholders for other tabs (optional minimal) */}
       {activeView !== 'today' && (
         <div className="p-6">
-          <div className="rounded-lg border bg-white p-6 text-sm text-gray-600">{activeView} view coming soon</div>
+          <div className="rounded-lg border bg-card p-6 text-sm text-muted-foreground">{activeView} view coming soon</div>
         </div>
       )}
     </div>

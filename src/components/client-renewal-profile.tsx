@@ -211,26 +211,20 @@ export const ClientRenewalProfile: React.FC = () => {
       : "low";
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
+    <div className="min-h-screen bg-background">
+      <div className="bg-card border-b sticky top-0 z-10">
         <div className="px-6 py-4">
           <div className="flex justify-between items-start">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-2xl font-semibold text-gray-900">{clientData.name}</h1>
+                <h1 className="text-2xl font-semibold text-foreground">{clientData.name}</h1>
                 <span
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    renewalUrgency === "high"
-                      ? "bg-red-100 text-red-700"
-                      : renewalUrgency === "medium"
-                      ? "bg-yellow-100 text-yellow-700"
-                      : "bg-green-100 text-green-700"
-                  }`}
+                  className={`px-3 py-1 rounded-full text-sm font-medium bg-accent text-foreground`}
                 >
                   Renewal in {clientData.currentMortgage.daysUntilRenewal} days
                 </span>
               </div>
-              <div className="flex items-center gap-6 text-sm text-gray-600">
+              <div className="flex items-center gap-6 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Home className="w-4 h-4" />
                   {clientData.propertyDetails.address}
@@ -251,48 +245,48 @@ export const ClientRenewalProfile: React.FC = () => {
                   setShowCallsPanel(true);
                   setSelectedCallId(calls[0]?.id ?? null);
                 }}
-                className="px-4 py-2 border border-blue-200 text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg flex items-center gap-2"
+                className="px-4 py-2 border text-primary bg-accent hover:opacity-90 rounded-lg flex items-center gap-2"
               >
                 <FileText className="w-4 h-4" />
                 Previous Calls' Analysis
               </button>
-              <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2">
+              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 flex items-center gap-2">
                 <Phone className="w-4 h-4" />
                 Call Now
               </button>
-              <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-2">
+              <button className="px-4 py-2 border rounded-lg hover:bg-accent flex items-center gap-2">
                 <MessageSquare className="w-4 h-4" />
                 Send Message
               </button>
-              <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+              <button className="px-4 py-2 border rounded-lg hover:bg-accent">
                 <FileText className="w-4 h-4" />
               </button>
             </div>
           </div>
         </div>
 
-        <div className="px-6 py-3 bg-blue-50 border-t border-blue-100">
+        <div className="px-6 py-3 bg-accent border-t">
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-6">
               <div>
-                <span className="text-gray-600">Property Value:</span>
-                <span className="font-semibold text-gray-900 ml-2">{clientData.propertyDetails.currentValue}</span>
-                <span className="text-green-600 ml-1">(+29%)</span>
+                <span className="text-muted-foreground">Property Value:</span>
+                <span className="font-semibold text-foreground ml-2">{clientData.propertyDetails.currentValue}</span>
+                <span className="text-primary ml-1">(+29%)</span>
               </div>
               <div>
-                <span className="text-gray-600">Available Equity:</span>
-                <span className="font-semibold text-gray-900 ml-2">{clientData.propertyDetails.equity}</span>
+                <span className="text-muted-foreground">Available Equity:</span>
+                <span className="font-semibold text-foreground ml-2">{clientData.propertyDetails.equity}</span>
               </div>
               <div>
-                <span className="text-gray-600">Payment Room:</span>
-                <span className="font-semibold text-gray-900 ml-2">~$2,500/mo</span>
+                <span className="text-muted-foreground">Payment Room:</span>
+                <span className="font-semibold text-foreground ml-2">~$2,500/mo</span>
               </div>
               <div>
-                <span className="text-gray-600">Lifetime Value:</span>
-                <span className="font-semibold text-green-600 ml-2">$8,450</span>
+                <span className="text-muted-foreground">Lifetime Value:</span>
+                <span className="font-semibold text-primary ml-2">$8,450</span>
               </div>
             </div>
-            <div className="flex items-center gap-2 text-purple-700">
+            <div className="flex items-center gap-2 text-primary">
               <Sparkles className="w-4 h-4" />
               <span className="font-medium">3 Cross-sell Opportunities</span>
             </div>
@@ -303,39 +297,39 @@ export const ClientRenewalProfile: React.FC = () => {
       {showCallsPanel && (
         <div className="fixed inset-0 z-50">
           <div
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-foreground/40"
             onClick={() => setShowCallsPanel(false)}
           />
-          <div className="absolute right-0 top-0 h-full w-full max-w-5xl bg-white shadow-xl flex flex-col">
+          <div className="absolute right-0 top-0 h-full w-full max-w-5xl bg-card shadow-xl flex flex-col">
             <div className="flex items-center justify-between border-b px-6 py-4">
               <div>
                 <h2 className="text-xl font-semibold">Call recordings & analysis</h2>
-                <p className="text-sm text-gray-600">Client: {clientData.name}</p>
+                <p className="text-sm text-muted-foreground">Client: {clientData.name}</p>
               </div>
               <button
                 onClick={() => setShowCallsPanel(false)}
-                className="px-3 py-1.5 text-sm rounded-md border hover:bg-gray-50"
+                className="px-3 py-1.5 text-sm rounded-md border hover:bg-accent"
               >
                 Close
               </button>
             </div>
             <div className="flex flex-1 overflow-hidden">
               <aside className="w-80 border-r overflow-y-auto">
-                <div className="p-3 border-b text-sm font-medium text-gray-700">Previous Calls</div>
+                <div className="p-3 border-b text-sm font-medium text-muted-foreground">Previous Calls</div>
                 <div className="divide-y">
                   {calls.map((c) => (
                     <button
                       key={c.id}
                       onClick={() => setSelectedCallId(c.id)}
-                      className={`w-full text-left p-4 hover:bg-gray-50 ${
-                        selectedCallId === c.id ? "bg-blue-50" : ""
+                      className={`w-full text-left p-4 hover:bg-accent ${
+                        selectedCallId === c.id ? "bg-accent" : ""
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <div className="text-sm font-medium text-gray-900">{c.date} • {c.duration}</div>
+                        <div className="text-sm font-medium text-foreground">{c.date} • {c.duration}</div>
                         <span className="text-xs px-2 py-0.5 rounded-md border">{c.sentiment}</span>
                       </div>
-                      <div className="text-xs text-gray-600 mt-1 line-clamp-1">{c.title}</div>
+                      <div className="text-xs text-muted-foreground mt-1 line-clamp-1">{c.title}</div>
                     </button>
                   ))}
                 </div>
@@ -352,13 +346,13 @@ export const ClientRenewalProfile: React.FC = () => {
       <div className="max-w-7xl mx-auto p-6">
         <div className="grid grid-cols-3 gap-6">
           <div className="col-span-2 space-y-6">
-            <div className="bg-white rounded-lg border border-gray-200">
+            <div className="bg-card rounded-lg border">
               <div
-                className="px-4 py-3 border-b border-gray-200 flex justify-between items-center cursor-pointer"
+                className="px-4 py-3 border-b flex justify-between items-center cursor-pointer"
                 onClick={() => toggleSection("dealHistory")}
               >
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <BarChart3 className="w-5 h-5 text-blue-600" />
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5 text-primary" />
                   Original Deal Analysis (2020)
                 </h3>
                 {expandedSections.dealHistory ? (
@@ -371,40 +365,40 @@ export const ClientRenewalProfile: React.FC = () => {
                 <div className="p-4">
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Deal Details</h4>
+                      <h4 className="font-medium text-foreground mb-2">Deal Details</h4>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Original Amount:</span>
+                          <span className="text-muted-foreground">Original Amount:</span>
                           <span className="font-medium">{clientData.originalDeal.amount}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Rate Secured:</span>
-                          <span className="font-medium text-green-600">{clientData.originalDeal.rateAtTime}</span>
+                          <span className="text-muted-foreground">Rate Secured:</span>
+                          <span className="font-medium text-primary">{clientData.originalDeal.rateAtTime}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Your Commission:</span>
+                          <span className="text-muted-foreground">Your Commission:</span>
                           <span className="font-medium">{clientData.originalDeal.commission}</span>
                         </div>
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Competitive Landscape</h4>
+                      <h4 className="font-medium text-foreground mb-2">Competitive Landscape</h4>
                       <div className="space-y-2 text-sm">
                         {clientData.originalDeal.competingOffers.map((offer, idx) => (
                           <div key={idx} className="flex items-center gap-2">
-                            <XCircle className="w-3 h-3 text-red-500" />
-                            <span className="text-gray-600">{offer}</span>
+                            <XCircle className="w-3 h-3 text-destructive" />
+                            <span className="text-muted-foreground">{offer}</span>
                           </div>
                         ))}
-                        <div className="flex items-center gap-2 text-green-600">
+                        <div className="flex items-center gap-2 text-primary">
                           <CheckCircle className="w-3 h-3" />
                           <span className="font-medium">You won with best rate</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="pt-3 border-t border-gray-200">
-                    <p className="text-sm text-gray-700">
+                  <div className="pt-3 border-t">
+                    <p className="text-sm text-muted-foreground">
                       <strong>Why they chose you:</strong> {clientData.originalDeal.whyTheyChose}
                     </p>
                   </div>
@@ -412,13 +406,13 @@ export const ClientRenewalProfile: React.FC = () => {
               )}
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200">
+            <div className="bg-card rounded-lg border">
               <div
-                className="px-4 py-3 border-b border-gray-200 flex justify-between items-center cursor-pointer"
+                className="px-4 py-3 border-b flex justify-between items-center cursor-pointer"
                 onClick={() => toggleSection("lifeChanges")}
               >
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-purple-600" />
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <Users className="w-5 h-5 text-primary" />
                   Life Changes Since Last Deal
                 </h3>
                 {expandedSections.lifeChanges ? (
@@ -435,16 +429,16 @@ export const ClientRenewalProfile: React.FC = () => {
                       return (
                         <div key={idx} className="flex gap-4">
                           <div className="flex-shrink-0">
-                            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                              <Icon className="w-5 h-5 text-purple-600" />
+                            <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                              <Icon className="w-5 h-5 text-primary" />
                             </div>
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium text-gray-900">{event.event}</span>
-                              <span className="text-sm text-gray-500">({event.date})</span>
+                              <span className="font-medium text-foreground">{event.event}</span>
+                              <span className="text-sm text-muted-foreground">({event.date})</span>
                             </div>
-                            <p className="text-sm text-gray-600">{event.impact}</p>
+                            <p className="text-sm text-muted-foreground">{event.impact}</p>
                           </div>
                         </div>
                       );
@@ -454,13 +448,13 @@ export const ClientRenewalProfile: React.FC = () => {
               )}
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200">
+            <div className="bg-card rounded-lg border">
               <div
-                className="px-4 py-3 border-b border-gray-200 flex justify-between items-center cursor-pointer"
+                className="px-4 py-3 border-b flex justify-between items-center cursor-pointer"
                 onClick={() => toggleSection("financialProfile")}
               >
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <DollarSign className="w-5 h-5 text-green-600" />
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <DollarSign className="w-5 h-5 text-primary" />
                   Current Financial Snapshot
                 </h3>
                 {expandedSections.financialProfile ? (
@@ -473,54 +467,54 @@ export const ClientRenewalProfile: React.FC = () => {
                 <div className="p-4">
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-3">Income & Employment</h4>
+                      <h4 className="font-medium text-foreground mb-3">Income & Employment</h4>
                       <div className="space-y-2 text-sm">
                         <div>
-                          <span className="text-gray-600">Household Income:</span>
+                          <span className="text-muted-foreground">Household Income:</span>
                           <span className="font-medium ml-2">{clientData.clientProfile.householdIncome}</span>
-                          <span className="text-green-600 ml-1">(+$25k)</span>
+                          <span className="text-primary ml-1">(+$25k)</span>
                         </div>
                         <div>
-                          <span className="text-gray-600">Jennifer:</span>
+                          <span className="text-muted-foreground">Jennifer:</span>
                           <span className="ml-2">{clientData.clientProfile.occupations.split(",")[0]}</span>
                         </div>
                         <div>
-                          <span className="text-gray-600">Robert:</span>
+                          <span className="text-muted-foreground">Robert:</span>
                           <span className="ml-2">{clientData.clientProfile.occupations.split(",")[1]}</span>
                         </div>
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-3">Other Debts</h4>
+                      <h4 className="font-medium text-foreground mb-3">Other Debts</h4>
                       <div className="space-y-2">
                         {clientData.financialSnapshot.otherDebts.map((debt, idx) => (
-                          <div key={idx} className="text-sm bg-gray-50 rounded p-2">
+                          <div key={idx} className="text-sm bg-secondary rounded p-2">
                             <div className="flex justify-between">
                               <span className="font-medium">{debt.type}</span>
                               <span>{debt.amount}</span>
                             </div>
-                            <div className="flex justify-between text-xs text-gray-600 mt-1">
+                            <div className="flex justify-between text-xs text-muted-foreground mt-1">
                               <span>Payment: {debt.payment}/mo</span>
-                              <span className="text-red-600">Rate: {debt.rate}</span>
+                              <span className="text-destructive">Rate: {debt.rate}</span>
                             </div>
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4 pt-4 border-t border-gray-200">
+                  <div className="mt-4 pt-4 border-t">
                     <div className="grid grid-cols-3 gap-4 text-sm">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-gray-900">{clientData.financialSnapshot.totalDebtPayments}</div>
-                        <div className="text-xs text-gray-600">Total Debt Payments</div>
+                        <div className="text-2xl font-bold text-foreground">{clientData.financialSnapshot.totalDebtPayments}</div>
+                        <div className="text-xs text-muted-foreground">Total Debt Payments</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-green-600">{clientData.financialSnapshot.disposableIncome}</div>
-                        <div className="text-xs text-gray-600">Disposable Income</div>
+                        <div className="text-2xl font-bold text-primary">{clientData.financialSnapshot.disposableIncome}</div>
+                        <div className="text-xs text-muted-foreground">Disposable Income</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">$142k</div>
-                        <div className="text-xs text-gray-600">Total Investments</div>
+                        <div className="text-2xl font-bold text-primary">$142k</div>
+                        <div className="text-xs text-muted-foreground">Total Investments</div>
                       </div>
                     </div>
                   </div>
@@ -530,36 +524,36 @@ export const ClientRenewalProfile: React.FC = () => {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 p-4">
-              <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+            <div className="bg-accent rounded-lg border p-4">
+              <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                 <Target className="w-5 h-5" />
                 Primary Opportunity
               </h3>
               <div className="space-y-3">
                 <div>
-                  <div className="font-medium text-blue-900">{clientData.opportunityAnalysis.primary.product}</div>
-                  <p className="text-sm text-blue-700 mt-1">{clientData.opportunityAnalysis.primary.strategy}</p>
+                  <div className="font-medium text-foreground">{clientData.opportunityAnalysis.primary.product}</div>
+                  <p className="text-sm text-muted-foreground mt-1">{clientData.opportunityAnalysis.primary.strategy}</p>
                 </div>
-                <div className="bg-white/70 rounded p-3">
+                <div className="bg-card/70 rounded p-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-blue-800">Potential Savings:</span>
-                    <span className="font-bold text-blue-900">{clientData.opportunityAnalysis.primary.savings}</span>
+                    <span className="text-sm text-muted-foreground">Potential Savings:</span>
+                    <span className="font-bold text-foreground">{clientData.opportunityAnalysis.primary.savings}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-red-700 bg-red-50 rounded p-2">
+                <div className="flex items-center gap-2 text-sm text-destructive bg-destructive/10 rounded p-2">
                   <AlertCircle className="w-4 h-4" />
                   <span>{clientData.opportunityAnalysis.primary.urgency}</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200">
+            <div className="bg-card rounded-lg border">
               <div
-                className="px-4 py-3 border-b border-gray-200 flex justify-between items-center cursor-pointer"
+                className="px-4 py-3 border-b flex justify-between items-center cursor-pointer"
                 onClick={() => toggleSection("opportunities")}
               >
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-purple-600" />
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-primary" />
                   Cross-sell Opportunities
                 </h3>
                 {expandedSections.opportunities ? (
@@ -571,19 +565,19 @@ export const ClientRenewalProfile: React.FC = () => {
               {expandedSections.opportunities && (
                 <div className="p-4 space-y-3">
                   {clientData.opportunityAnalysis.secondary.map((opp, idx) => (
-                    <div key={idx} className="border-l-4 border-purple-400 pl-3">
-                      <div className="font-medium text-gray-900">{opp.product}</div>
-                      <p className="text-xs text-gray-600 mt-1">{opp.reason}</p>
+                    <div key={idx} className="border-l-4 pl-3">
+                      <div className="font-medium text-foreground">{opp.product}</div>
+                      <p className="text-xs text-muted-foreground mt-1">{opp.reason}</p>
                       {"potentialSaving" in opp && (opp as any).potentialSaving && (
-                        <p className="text-sm text-green-600 font-medium mt-1">
+                        <p className="text-sm text-primary font-medium mt-1">
                           Save {(opp as any).potentialSaving}
                         </p>
                       )}
                       {"amount" in opp && (opp as any).amount && (
-                        <p className="text-sm text-blue-600 font-medium mt-1">{(opp as any).amount} available</p>
+                        <p className="text-sm text-primary font-medium mt-1">{(opp as any).amount} available</p>
                       )}
                       {"gap" in opp && (opp as any).gap && (
-                        <p className="text-sm text-red-600 mt-1">Gap: {(opp as any).gap}</p>
+                        <p className="text-sm text-destructive mt-1">Gap: {(opp as any).gap}</p>
                       )}
                     </div>
                   ))}
@@ -591,13 +585,13 @@ export const ClientRenewalProfile: React.FC = () => {
               )}
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200">
+            <div className="bg-card rounded-lg border">
               <div
-                className="px-4 py-3 border-b border-gray-200 flex justify-between items-center cursor-pointer"
+                className="px-4 py-3 border-b flex justify-between items-center cursor-pointer"
                 onClick={() => toggleSection("talkingPoints")}
               >
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <MessageSquare className="w-5 h-5 text-green-600" />
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <MessageSquare className="w-5 h-5 text-primary" />
                   Conversation Strategy
                 </h3>
                 {expandedSections.talkingPoints ? (
@@ -609,28 +603,28 @@ export const ClientRenewalProfile: React.FC = () => {
               {expandedSections.talkingPoints && (
                 <div className="p-4">
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-900 mb-2">Opening:</h4>
-                    <p className="text-sm text-gray-700 italic">"{clientData.recommendedApproach.opening}"</p>
+                    <h4 className="font-medium text-foreground mb-2">Opening:</h4>
+                    <p className="text-sm text-muted-foreground italic">"{clientData.recommendedApproach.opening}"</p>
                   </div>
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-900 mb-2">Key Points:</h4>
+                    <h4 className="font-medium text-foreground mb-2">Key Points:</h4>
                     <ul className="space-y-1">
                       {clientData.recommendedApproach.keyPoints.map((point, idx) => (
-                        <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                          <span className="text-green-600 mt-0.5">•</span>
+                        <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                          <span className="text-primary mt-0.5">•</span>
                           <span>{point}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Objection Handlers:</h4>
+                    <h4 className="font-medium text-foreground mb-2">Objection Handlers:</h4>
                     <div className="space-y-2">
                       {Object.entries(clientData.recommendedApproach.objectionHandling).map(
                         ([objection, response], idx) => (
                           <div key={idx} className="text-sm">
-                            <div className="font-medium text-gray-700">"{objection}"</div>
-                            <div className="text-gray-600 italic ml-4">→ {response}</div>
+                            <div className="font-medium text-foreground">"{objection}"</div>
+                            <div className="text-muted-foreground italic ml-4">→ {response}</div>
                           </div>
                         )
                       )}
@@ -640,40 +634,40 @@ export const ClientRenewalProfile: React.FC = () => {
               )}
             </div>
 
-            <div className="bg-yellow-50 rounded-lg border border-yellow-200 p-4">
-              <h3 className="font-semibold text-yellow-900 mb-2">⚠️ Competitive Alert</h3>
+            <div className="bg-accent rounded-lg border p-4">
+              <h3 className="font-semibold text-foreground mb-2">⚠️ Competitive Alert</h3>
               <div className="space-y-2 text-sm">
-                <p className="text-yellow-800">
+                <p className="text-foreground">
                   TD offering {clientData.competitorIntel.currentOffers[0].incentive}
                 </p>
-                <p className="text-yellow-800">
+                <p className="text-foreground">
                   RBC actively courting with {clientData.competitorIntel.currentOffers[1].rate} rate
                 </p>
-                <p className="font-medium text-yellow-900 mt-2">
+                <p className="font-medium text-foreground mt-2">
                   Client loyalty: {clientData.competitorIntel.clientLoyalty}
                 </p>
               </div>
             </div>
 
-            <div className="bg-gray-100 rounded-lg p-4">
-              <h4 className="font-medium text-gray-900 mb-3">Quick Actions</h4>
+            <div className="bg-secondary rounded-lg p-4">
+              <h4 className="font-medium text-foreground mb-3">Quick Actions</h4>
               <div className="space-y-2">
-                <button className="w-full text-left p-3 bg-white rounded-lg hover:shadow-md transition-shadow">
+                <button className="w-full text-left p-3 bg-card rounded-lg hover:shadow-md transition-shadow">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Generate Renewal Proposal</span>
-                    <ArrowRight className="w-4 h-4 text-gray-400" />
+                    <ArrowRight className="w-4 h-4 text-muted-foreground" />
                   </div>
                 </button>
-                <button className="w-full text-left p-3 bg-white rounded-lg hover:shadow-md transition-shadow">
+                <button className="w-full text-left p-3 bg-card rounded-lg hover:shadow-md transition-shadow">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Run New Scenarios</span>
-                    <ArrowRight className="w-4 h-4 text-gray-400" />
+                    <ArrowRight className="w-4 h-4 text-muted-foreground" />
                   </div>
                 </button>
-                <button className="w-full text-left p-3 bg-white rounded-lg hover:shadow-md transition-shadow">
+                <button className="w-full text-left p-3 bg-card rounded-lg hover:shadow-md transition-shadow">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Schedule Meeting</span>
-                    <ArrowRight className="w-4 h-4 text-gray-400" />
+                    <ArrowRight className="w-4 h-4 text-muted-foreground" />
                   </div>
                 </button>
               </div>

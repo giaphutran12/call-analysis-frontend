@@ -57,21 +57,21 @@ export default function ProspectingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <BrokerHeader />
       <div className="flex-1 p-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Prospecting Center</h2>
-              <p className="text-gray-600 mt-1">Convert leads into applications • 12 hot leads waiting</p>
+              <h2 className="text-2xl font-bold text-foreground">Prospecting Center</h2>
+              <p className="text-muted-foreground mt-1">Convert leads into applications • 12 hot leads waiting</p>
             </div>
             <div className="flex gap-3">
-              <button className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2">
+              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 flex items-center gap-2">
                 <Target className="w-4 h-4" />
                 Auto-Dialer
               </button>
-              <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2">
+              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 flex items-center gap-2">
                 <Phone className="w-4 h-4" />
                 Start Session
               </button>
@@ -82,17 +82,17 @@ export default function ProspectingPage() {
             {summary.map((card) => {
               const Icon = card.icon;
               return (
-                <div key={card.label} className={`bg-white rounded-xl p-4 border border-gray-200`}>
+                <div key={card.label} className={`bg-card rounded-xl p-4 border`}>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-gray-600">{card.label}</p>
-                      <p className={`text-2xl font-bold text-${card.color}-600`}>{card.value}</p>
+                      <p className="text-sm text-muted-foreground">{card.label}</p>
+                      <p className={`text-2xl font-bold text-foreground`}>{card.value}</p>
                     </div>
-                    <div className={`w-12 h-12 bg-${card.color}-100 rounded-lg flex items-center justify-center`}>
-                      <Icon className={`w-6 h-6 text-${card.color}-600`} />
+                    <div className={`w-12 h-12 bg-accent rounded-lg flex items-center justify-center`}>
+                      <Icon className={`w-6 h-6 text-primary`} />
                     </div>
                   </div>
-                  <div className={`mt-2 text-xs ${card.color === 'yellow' ? 'text-red-600' : `text-${card.color}-600`}`}>{card.delta}</div>
+                  <div className={`mt-2 text-xs ${card.color === 'yellow' ? 'text-destructive' : 'text-muted-foreground'}`}>{card.delta}</div>
                 </div>
               );
             })}
@@ -100,42 +100,42 @@ export default function ProspectingPage() {
 
           <div className="grid grid-cols-3 gap-6">
             <div className="col-span-2">
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-                <div className="p-4 border-b border-gray-100">
+              <div className="bg-card rounded-xl border overflow-hidden">
+                <div className="p-4 border-b">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-gray-900">Priority Prospects</h3>
+                    <h3 className="text-lg font-semibold text-foreground">Priority Prospects</h3>
                     <div className="flex gap-2">
-                      <button className="text-sm text-gray-600 hover:text-gray-900">All</button>
-                      <button className="text-sm bg-red-100 text-red-700 px-2 py-1 rounded">Hot</button>
-                      <button className="text-sm text-gray-600 hover:text-gray-900">Warm</button>
+                      <button className="text-sm text-muted-foreground hover:text-foreground">All</button>
+                      <button className="text-sm bg-accent text-foreground px-2 py-1 rounded">Hot</button>
+                      <button className="text-sm text-muted-foreground hover:text-foreground">Warm</button>
                     </div>
                   </div>
                 </div>
-                <div className="divide-y divide-gray-100">
+                <div className="divide-y">
                   {prospects.map((p) => (
-                    <div key={p.email} className="p-4 hover:bg-gray-50 transition-colors">
+                    <div key={p.email} className="p-4 hover:bg-accent transition-colors">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h4 className="font-semibold text-gray-900">{p.name}</h4>
-                            <span className={`px-2 py-1 rounded text-xs font-medium ${p.priority === 'hot' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}`}>{p.priority}</span>
-                            <span className="text-xs text-gray-500">{p.lastContact}</span>
+                            <h4 className="font-semibold text-foreground">{p.name}</h4>
+                            <span className={`px-2 py-1 rounded text-xs font-medium bg-accent text-foreground`}>{p.priority}</span>
+                            <span className="text-xs text-muted-foreground">{p.lastContact}</span>
                           </div>
-                          <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
                             <span>{p.phone}</span>
                             <span>•</span>
                             <span>{p.source}</span>
                             <span>•</span>
-                            <span className="font-medium text-green-600">{p.amount}</span>
+                            <span className="font-medium text-foreground">{p.amount}</span>
                           </div>
-                          <div className="text-sm text-gray-700 mb-1">{p.property}</div>
-                          <div className="text-xs text-gray-500">{p.notes}</div>
+                          <div className="text-sm text-muted-foreground mb-1">{p.property}</div>
+                          <div className="text-xs text-muted-foreground">{p.notes}</div>
                         </div>
                         <div className="flex gap-2 ml-4">
-                          <button className="p-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                          <button className="p-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90">
                             <Phone className="w-4 h-4" />
                           </button>
-                          <button className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                          <button className="p-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90">
                             <MessageSquare className="w-4 h-4" />
                           </button>
                         </div>
@@ -147,34 +147,34 @@ export default function ProspectingPage() {
             </div>
 
             <div className="space-y-4">
-              <div className="bg-white rounded-xl p-4 border border-gray-200">
-                <h3 className="font-semibold text-gray-900 mb-3">Call Scripts</h3>
+              <div className="bg-card rounded-xl p-4 border">
+                <h3 className="font-semibold text-foreground mb-3">Call Scripts</h3>
                 <div className="space-y-2">
-                  <button className="w-full text-left p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors">
-                    <div className="font-medium text-sm text-blue-900">First Contact</div>
-                    <div className="text-xs text-blue-600">Introduction & qualification</div>
+                  <button className="w-full text-left p-3 rounded-lg bg-accent hover:opacity-90 transition-colors">
+                    <div className="font-medium text-sm text-foreground">First Contact</div>
+                    <div className="text-xs text-primary">Introduction & qualification</div>
                   </button>
-                  <button className="w-full text-left p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors">
-                    <div className="font-medium text-sm text-green-900">Follow-up</div>
-                    <div className="text-xs text-green-600">Rate discussion & next steps</div>
+                  <button className="w-full text-left p-3 rounded-lg bg-accent hover:opacity-90 transition-colors">
+                    <div className="font-medium text-sm text-foreground">Follow-up</div>
+                    <div className="text-xs text-primary">Rate discussion & next steps</div>
                   </button>
-                  <button className="w-full text-left p-3 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors">
-                    <div className="font-medium text-sm text-purple-900">Objection Handling</div>
-                    <div className="text-xs text-purple-600">Rate shopping responses</div>
+                  <button className="w-full text-left p-3 rounded-lg bg-accent hover:opacity-90 transition-colors">
+                    <div className="font-medium text-sm text-foreground">Objection Handling</div>
+                    <div className="text-xs text-primary">Rate shopping responses</div>
                   </button>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-green-500 to-blue-600 rounded-xl p-4 text-white">
+              <div className="rounded-xl p-4 bg-primary text-primary-foreground">
                 <h3 className="font-semibold mb-2">Today's Challenge</h3>
-                <p className="text-sm opacity-90 mb-3">Convert 3 prospects to applications</p>
-                <div className="w-full bg-white/20 rounded-full h-2 mb-2">
-                  <div className="bg-white h-2 rounded-full" style={{ width: '66%' }} />
+                <p className="text-sm/6 opacity-90 mb-3">Convert 3 prospects to applications</p>
+                <div className="w-full bg-primary-foreground/20 rounded-full h-2 mb-2">
+                  <div className="bg-primary-foreground h-2 rounded-full" style={{ width: '66%' }} />
                 </div>
                 <div className="text-xs opacity-75">2 of 3 completed</div>
               </div>
 
-              <div className="rounded-xl border bg-white p-3 flex items-center gap-2 text-gray-700">
+              <div className="rounded-xl border bg-card p-3 flex items-center gap-2 text-muted-foreground">
                 <Search className="w-4 h-4" />
                 <span className="text-sm">Quick search prospects</span>
               </div>

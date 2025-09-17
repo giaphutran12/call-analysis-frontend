@@ -278,44 +278,44 @@ export const CallIntelligenceDashboard: React.FC = () => {
   const getUrgencyColor = (level: string) => {
     switch (level) {
       case "high":
-        return "text-red-600 bg-red-100";
+        return "text-destructive bg-destructive/10";
       case "medium":
-        return "text-yellow-600 bg-yellow-100";
+        return "text-foreground bg-accent";
       case "low":
-        return "text-green-600 bg-green-100";
+        return "text-muted-foreground bg-muted";
       default:
-        return "text-gray-600 bg-gray-100";
+        return "text-muted-foreground bg-muted";
     }
   };
 
   const getOutcomeColor = (outcome: string) => {
     switch (outcome) {
       case "application_started":
-        return "text-green-700 bg-green-100";
+        return "text-primary bg-primary/10";
       case "quoted":
-        return "text-blue-700 bg-blue-100";
+        return "text-foreground bg-accent";
       case "follow_up_scheduled":
-        return "text-purple-700 bg-purple-100";
+        return "text-foreground bg-accent";
       case "not_interested":
-        return "text-red-700 bg-red-100";
+        return "text-destructive bg-destructive/10";
       case "voicemail":
-        return "text-yellow-700 bg-yellow-100";
+        return "text-muted-foreground bg-muted";
       default:
-        return "text-gray-700 bg-gray-100";
+        return "text-muted-foreground bg-muted";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
+    <div className="min-h-screen bg-background">
+      <div className="bg-card border-b border px-6 py-4">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Call Intelligence Dashboard</h1>
-            <p className="text-sm text-gray-500 mt-1">AI-powered analysis of your calls</p>
+            <h1 className="text-2xl font-semibold text-foreground">Call Intelligence Dashboard</h1>
+            <p className="text-sm text-muted-foreground mt-1">AI-powered analysis of your calls</p>
           </div>
           <div className="flex gap-3">
             <select
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-2 border rounded-lg bg-background text-foreground border"
               value={timeFilter}
               onChange={(e) => setTimeFilter(e.target.value)}
             >
@@ -323,7 +323,7 @@ export const CallIntelligenceDashboard: React.FC = () => {
               <option value="week">This Week</option>
               <option value="month">This Month</option>
             </select>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2">
+            <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 flex items-center gap-2">
               <Phone className="w-4 h-4" />
               Start Calling
             </button>
@@ -331,31 +331,31 @@ export const CallIntelligenceDashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white px-6 py-4 border-b border-gray-200">
+      <div className="bg-card px-6 py-4 border-b border">
         <div className="grid grid-cols-6 gap-6">
           <div>
-            <div className="text-3xl font-bold text-gray-900">{stats.totalCalls}</div>
-            <div className="text-sm text-gray-600">Total Calls</div>
+            <div className="text-3xl font-bold text-foreground">{stats.totalCalls}</div>
+            <div className="text-sm text-muted-foreground">Total Calls</div>
           </div>
           <div>
-            <div className="text-3xl font-bold text-green-600">{stats.connected}</div>
-            <div className="text-sm text-gray-600">Connected</div>
+            <div className="text-3xl font-bold text-foreground">{stats.connected}</div>
+            <div className="text-sm text-muted-foreground">Connected</div>
           </div>
           <div>
-            <div className="text-3xl font-bold text-blue-600">{stats.applications}</div>
-            <div className="text-sm text-gray-600">Applications</div>
+            <div className="text-3xl font-bold text-foreground">{stats.applications}</div>
+            <div className="text-sm text-muted-foreground">Applications</div>
           </div>
           <div>
-            <div className="text-3xl font-bold text-purple-600">{stats.avgObjHandling}%</div>
-            <div className="text-sm text-gray-600">Objections Handled</div>
+            <div className="text-3xl font-bold text-foreground">{stats.avgObjHandling}%</div>
+            <div className="text-sm text-muted-foreground">Objections Handled</div>
           </div>
           <div>
-            <div className="text-3xl font-bold text-orange-600">{stats.crossSellsIdentified}</div>
-            <div className="text-sm text-gray-600">Cross-sells Found</div>
+            <div className="text-3xl font-bold text-foreground">{stats.crossSellsIdentified}</div>
+            <div className="text-sm text-muted-foreground">Cross-sells Found</div>
           </div>
           <div>
-            <div className="text-3xl font-bold text-red-600">{stats.highUrgency}</div>
-            <div className="text-sm text-gray-600">High Urgency</div>
+            <div className="text-3xl font-bold text-foreground">{stats.highUrgency}</div>
+            <div className="text-sm text-muted-foreground">High Urgency</div>
           </div>
         </div>
       </div>
@@ -365,10 +365,10 @@ export const CallIntelligenceDashboard: React.FC = () => {
           {callData.map((call) => (
             <div
               key={call.id}
-              className="bg-white rounded-lg border border-gray-200 overflow-hidden"
+              className="bg-card rounded-lg border border overflow-hidden"
             >
               <div
-                className="p-4 hover:bg-gray-50 cursor-pointer"
+                className="p-4 hover:bg-accent cursor-pointer"
                 onClick={() =>
                   setExpandedCall(expandedCall === call.id ? null : call.id)
                 }
@@ -376,23 +376,17 @@ export const CallIntelligenceDashboard: React.FC = () => {
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-4">
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        call.outcome === "voicemail"
-                          ? "bg-yellow-100"
-                          : call.outcome === "application_started"
-                          ? "bg-green-100"
-                          : "bg-blue-100"
-                      }`}
+                      className={`w-10 h-10 rounded-full flex items-center justify-center bg-accent`}
                     >
                       {call.outcome === "voicemail" ? (
-                        <MessageSquare className="w-5 h-5 text-yellow-600" />
+                        <MessageSquare className="w-5 h-5 text-muted-foreground" />
                       ) : (
-                        <PhoneCall className="w-5 h-5 text-blue-600" />
+                        <PhoneCall className="w-5 h-5 text-primary" />
                       )}
                     </div>
                     <div>
                       <div className="flex items-center gap-3">
-                        <h3 className="font-semibold text-gray-900">{call.contact}</h3>
+                        <h3 className="font-semibold text-foreground">{call.contact}</h3>
                         <span
                           className={`px-2 py-1 rounded-full text-xs font-medium ${getUrgencyColor(
                             call.urgencyLevel
@@ -407,11 +401,11 @@ export const CallIntelligenceDashboard: React.FC = () => {
                         >
                           {call.outcome.replace("_", " ")}
                         </span>
-                        <span className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                        <span className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-full">
                           {call.callType}
                         </span>
                       </div>
-                      <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
+                      <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
                         <span>{call.phone}</span>
                         <span>•</span>
                         <span>{call.time}</span>
@@ -420,42 +414,42 @@ export const CallIntelligenceDashboard: React.FC = () => {
                         {call.loanAmount && (
                           <>
                             <span>•</span>
-                            <span className="font-medium">{call.loanAmount}</span>
+                            <span className="font-medium text-foreground">{call.loanAmount}</span>
                           </>
                         )}
                       </div>
-                      <p className="text-sm text-gray-700 mt-2">{call.callSummary}</p>
+                      <p className="text-sm text-muted-foreground mt-2">{call.callSummary}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     {call.crossSellOpportunities.length > 0 && (
-                      <span className="flex items-center gap-1 px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">
-                        <Sparkles className="w-3 h-3" />
+                      <span className="flex items-center gap-1 px-2 py-1 bg-accent text-foreground rounded-full text-xs font-medium">
+                        <Sparkles className="w-3 h-3 text-primary" />
                         {call.crossSellOpportunities.length} cross-sell
                       </span>
                     )}
                     {expandedCall === call.id ? (
-                      <ChevronUp className="w-5 h-5 text-gray-400" />
+                      <ChevronUp className="w-5 h-5 text-muted-foreground" />
                     ) : (
-                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
                     )}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
+                <div className="flex items-center justify-between mt-3 pt-3 border-t border">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-600">Next:</span>
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-sm text-muted-foreground">Next:</span>
+                    <span className="text-sm font-medium text-foreground">
                       {call.nextSteps}
                     </span>
                     {call.followUpDate && (
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-muted-foreground">
                         • Due: {call.followUpDate}
                       </span>
                     )}
                   </div>
                   {call.duration !== "0:45" && (
-                    <button className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                    <button className="text-sm text-primary hover:opacity-90 flex items-center gap-1">
                       <Play className="w-3 h-3" />
                       Play Recording
                     </button>
@@ -464,30 +458,30 @@ export const CallIntelligenceDashboard: React.FC = () => {
               </div>
 
               {expandedCall === call.id && (
-                <div className="border-t border-gray-200 p-4 bg-gray-50">
+                <div className="border-t border p-4 bg-secondary">
                   <div className="grid grid-cols-3 gap-6">
                     <div className="space-y-4">
                       {call.propertyDetails.propertyType && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <Home className="w-4 h-4 text-gray-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <Home className="w-4 h-4 text-muted-foreground" />
                             Property Details
                           </h4>
-                          <div className="bg-white rounded-lg p-3 space-y-1 text-sm">
+                          <div className="bg-card rounded-lg p-3 space-y-1 text-sm">
                             <div>
-                              <span className="text-gray-600">Type:</span>{" "}
+                              <span className="text-muted-foreground">Type:</span>{" "}
                               <span className="font-medium">
                                 {call.propertyDetails.propertyType}
                               </span>
                             </div>
                             <div>
-                              <span className="text-gray-600">Value:</span>{" "}
+                              <span className="text-muted-foreground">Value:</span>{" "}
                               <span className="font-medium">
                                 {call.propertyDetails.propertyValue}
                               </span>
                             </div>
                             <div>
-                              <span className="text-gray-600">Location:</span>{" "}
+                              <span className="text-muted-foreground">Location:</span>{" "}
                               <span className="font-medium">
                                 {call.propertyDetails.location}
                               </span>
@@ -498,25 +492,25 @@ export const CallIntelligenceDashboard: React.FC = () => {
 
                       {call.clientProfile.employmentMentioned && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <User className="w-4 h-4 text-gray-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <User className="w-4 h-4 text-muted-foreground" />
                             Client Profile
                           </h4>
-                          <div className="bg-white rounded-lg p-3 space-y-1 text-sm">
+                          <div className="bg-card rounded-lg p-3 space-y-1 text-sm">
                             <div>
-                              <span className="text-gray-600">Employment:</span>{" "}
+                              <span className="text-muted-foreground">Employment:</span>{" "}
                               <span className="font-medium">
                                 {call.clientProfile.employmentMentioned}
                               </span>
                             </div>
                             <div>
-                              <span className="text-gray-600">Family:</span>{" "}
+                              <span className="text-muted-foreground">Family:</span>{" "}
                               <span className="font-medium">
                                 {call.clientProfile.familyStatus}
                               </span>
                             </div>
                             <div>
-                              <span className="text-gray-600">Goals:</span>{" "}
+                              <span className="text-muted-foreground">Goals:</span>{" "}
                               <span className="font-medium">
                                 {call.clientProfile.financialGoals}
                               </span>
@@ -527,14 +521,14 @@ export const CallIntelligenceDashboard: React.FC = () => {
 
                       {call.lifeEvents.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <Heart className="w-4 h-4 text-gray-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <Heart className="w-4 h-4 text-muted-foreground" />
                             Life Events
                           </h4>
-                          <div className="bg-white rounded-lg p-3 space-y-1">
+                          <div className="bg-card rounded-lg p-3 space-y-1">
                             {call.lifeEvents.map((event, idx) => (
                               <div key={idx} className="text-sm flex items-start gap-2">
-                                <span className="text-purple-600 mt-0.5">•</span>
+                                <span className="text-primary mt-0.5">•</span>
                                 <span>{event}</span>
                               </div>
                             ))}
@@ -546,14 +540,14 @@ export const CallIntelligenceDashboard: React.FC = () => {
                     <div className="space-y-4">
                       {call.keyPoints.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <Target className="w-4 h-4 text-gray-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <Target className="w-4 h-4 text-muted-foreground" />
                             Key Discussion Points
                           </h4>
-                          <div className="bg-white rounded-lg p-3 space-y-1">
+                          <div className="bg-card rounded-lg p-3 space-y-1">
                             {call.keyPoints.map((point, idx) => (
                               <div key={idx} className="text-sm flex items-start gap-2">
-                                <CheckCircle className="w-3 h-3 text-green-600 mt-0.5" />
+                                <CheckCircle className="w-3 h-3 text-primary mt-0.5" />
                                 <span>{point}</span>
                               </div>
                             ))}
@@ -563,21 +557,21 @@ export const CallIntelligenceDashboard: React.FC = () => {
 
                       {call.objections.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <AlertCircle className="w-4 h-4 text-gray-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <AlertCircle className="w-4 h-4 text-muted-foreground" />
                             Objections & Responses
                           </h4>
                           <div className="space-y-2">
                             {call.objections.map((obj, idx) => (
-                              <div key={idx} className="bg-white rounded-lg p-3 text-sm">
-                                <div className="text-red-700 font-medium">
+                              <div key={idx} className="bg-card rounded-lg p-3 text-sm">
+                                <div className="text-destructive font-medium">
                                   {obj.objection}
                                 </div>
-                                <div className="text-green-700 mt-1">
+                                <div className="text-primary mt-1">
                                   → {obj.broker_response}
                                 </div>
                                 {obj.objection_timestamp && (
-                                  <div className="text-xs text-gray-500 mt-1">
+                                  <div className="text-xs text-muted-foreground mt-1">
                                     {obj.objection_timestamp} → {obj.response_timestamp}
                                   </div>
                                 )}
@@ -589,14 +583,14 @@ export const CallIntelligenceDashboard: React.FC = () => {
 
                       {call.strengths.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <CheckCircle className="w-4 h-4 text-gray-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-muted-foreground" />
                             Call Strengths
                           </h4>
-                          <div className="bg-green-50 rounded-lg p-3 space-y-1">
+                          <div className="bg-secondary rounded-lg p-3 space-y-1">
                             {call.strengths.map((strength, idx) => (
                               <div key={idx} className="text-sm flex items-start gap-2">
-                                <span className="text-green-600">✓</span>
+                                <span className="text-primary">✓</span>
                                 <span>
                                   {strength.strength} {strength.timestamp}
                                 </span>
@@ -610,23 +604,23 @@ export const CallIntelligenceDashboard: React.FC = () => {
                     <div className="space-y-4">
                       {call.crossSellOpportunities.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <Sparkles className="w-4 h-4 text-purple-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <Sparkles className="w-4 h-4 text-primary" />
                             Cross-sell Opportunities
                           </h4>
                           <div className="space-y-2">
                             {call.crossSellOpportunities.map((opp, idx) => (
                               <div
                                 key={idx}
-                                className="bg-purple-50 border border-purple-200 rounded-lg p-3"
+                                className="bg-accent border border rounded-lg p-3"
                               >
-                                <div className="font-medium text-purple-900">
+                                <div className="font-medium text-foreground">
                                   {opp.product}
                                 </div>
-                                <div className="text-sm text-purple-700 mt-1">
+                                <div className="text-sm text-muted-foreground mt-1">
                                   {opp.reason}
                                 </div>
-                                <button className="text-xs text-purple-600 hover:text-purple-700 mt-2">
+                                <button className="text-xs text-primary hover:opacity-90 mt-2">
                                   Add to pipeline →
                                 </button>
                               </div>
@@ -637,30 +631,30 @@ export const CallIntelligenceDashboard: React.FC = () => {
 
                       {call.rateDiscussion.currentRate && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <DollarSign className="w-4 h-4 text-gray-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <DollarSign className="w-4 h-4 text-muted-foreground" />
                             Rate Discussion
                           </h4>
-                          <div className="bg-white rounded-lg p-3 space-y-1 text-sm">
+                          <div className="bg-card rounded-lg p-3 space-y-1 text-sm">
                             <div>
-                              <span className="text-gray-600">Current:</span>{" "}
+                              <span className="text-muted-foreground">Current:</span>{" "}
                               <span className="font-medium">
                                 {call.rateDiscussion.currentRate}
                               </span>
                             </div>
                             <div>
-                              <span className="text-gray-600">Desired:</span>{" "}
+                              <span className="text-muted-foreground">Desired:</span>{" "}
                               <span className="font-medium">
                                 {call.rateDiscussion.desiredRate}
                               </span>
                             </div>
                             <div>
-                              <span className="text-gray-600">Rate Sensitive:</span>{" "}
+                              <span className="text-muted-foreground">Rate Sensitive:</span>{" "}
                               <span
                                 className={`font-medium ${
                                   call.rateDiscussion.rateSensitive
-                                    ? "text-red-600"
-                                    : "text-green-600"
+                                    ? "text-destructive"
+                                    : "text-foreground"
                                 }`}
                               >
                                 {call.rateDiscussion.rateSensitive ? "Yes" : "No"}
@@ -672,14 +666,14 @@ export const CallIntelligenceDashboard: React.FC = () => {
 
                       {call.competitorMentions.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                            <Building className="w-4 h-4 text-gray-600" />
+                          <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                            <Building className="w-4 h-4 text-muted-foreground" />
                             Competition
                           </h4>
-                          <div className="bg-yellow-50 rounded-lg p-3">
+                          <div className="bg-secondary rounded-lg p-3">
                             {call.competitorMentions.map((comp, idx) => (
                               <div key={idx} className="text-sm flex items-center gap-2">
-                                <AlertTriangle className="w-3 h-3 text-yellow-600" />
+                                <AlertTriangle className="w-3 h-3 text-foreground" />
                                 <span>{comp}</span>
                               </div>
                             ))}
@@ -688,33 +682,33 @@ export const CallIntelligenceDashboard: React.FC = () => {
                       )}
 
                       <div>
-                        <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                          <BarChart3 className="w-4 h-4 text-gray-600" />
+                        <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
+                          <BarChart3 className="w-4 h-4 text-muted-foreground" />
                           Call Quality
                         </h4>
-                        <div className="bg-white rounded-lg p-3 space-y-1 text-sm">
+                        <div className="bg-card rounded-lg p-3 space-y-1 text-sm">
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Engagement:</span>
+                            <span className="text-muted-foreground">Engagement:</span>
                             <span
                               className={`font-medium ${
                                 call.callQuality.clientEngagement === "high"
-                                  ? "text-green-600"
+                                  ? "text-foreground"
                                   : call.callQuality.clientEngagement === "medium"
-                                  ? "text-yellow-600"
-                                  : "text-red-600"
+                                  ? "text-foreground"
+                                  : "text-destructive"
                               }`}
                             >
                               {call.callQuality.clientEngagement}
                             </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Next Contact:</span>
+                            <span className="text-muted-foreground">Next Contact:</span>
                             <span className="font-medium">
                               {call.callQuality.nextContactAgreed ? "Yes" : "No"}
                             </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Timeline Given:</span>
+                            <span className="text-muted-foreground">Timeline Given:</span>
                             <span className="font-medium">
                               {call.callQuality.specificTimeframeGiven ? "Yes" : "No"}
                             </span>
