@@ -22,6 +22,7 @@ import {
   XCircle,
   ArrowRight,
 } from "lucide-react";
+import CallAnalysisDetail from "@/reference/call recordings and analysis";
 
 export const ClientRenewalProfile: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -341,73 +342,7 @@ export const ClientRenewalProfile: React.FC = () => {
               </aside>
 
               <section className="flex-1 overflow-y-auto">
-                <div className="p-6 space-y-6">
-                  {(() => {
-                    const active = calls.find((x) => x.id === selectedCallId);
-                    if (!active) return null;
-                    return (
-                      <>
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h3 className="text-lg font-semibold">{active.title}</h3>
-                            <p className="text-sm text-gray-600">{active.date} • {active.duration} • Sentiment: {active.sentiment}</p>
-                          </div>
-                          <div className="flex gap-2">
-                            <button className="px-3 py-1.5 text-sm rounded-md border hover:bg-gray-50 flex items-center gap-2">
-                              <FileText className="w-4 h-4" /> Transcript
-                            </button>
-                            <button className="px-3 py-1.5 text-sm rounded-md border hover:bg-gray-50 flex items-center gap-2">
-                              <Target className="w-4 h-4" /> Insights
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="rounded-lg border bg-gray-50 p-4">
-                          <div className="h-16 bg-gradient-to-r from-blue-100 to-purple-100 rounded-md"></div>
-                          <div className="mt-2 text-xs text-gray-600">Audio waveform placeholder</div>
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-4">
-                          <div className="rounded-lg border p-4">
-                            <div className="text-xs text-gray-600">Overall Sentiment</div>
-                            <div className="text-lg font-semibold mt-1">{active.sentiment}</div>
-                          </div>
-                          <div className="rounded-lg border p-4">
-                            <div className="text-xs text-gray-600">Key Topics</div>
-                            <ul className="mt-2 text-sm text-gray-700 list-disc list-inside space-y-1">
-                              <li>Renewal strategy discussion</li>
-                              <li>Rate options comparison</li>
-                              <li>Next-step commitments</li>
-                            </ul>
-                          </div>
-                          <div className="rounded-lg border p-4">
-                            <div className="text-xs text-gray-600">Action Items</div>
-                            <ul className="mt-2 text-sm text-gray-700 list-disc list-inside space-y-1">
-                              <li>Send updated proposal</li>
-                              <li>Schedule appraisal</li>
-                              <li>Prepare consolidation plan</li>
-                            </ul>
-                          </div>
-                        </div>
-
-                        <div className="rounded-lg border">
-                          <div className="px-4 py-3 border-b font-medium">Transcript Highlights</div>
-                          <div className="p-4 space-y-3 text-sm text-gray-700">
-                            <p>
-                              Broker: "Based on your current rate, we can save about $180/month with a blend & extend."
-                            </p>
-                            <p>
-                              Client: "We want to understand penalties and portability in case we move next year."
-                            </p>
-                            <p>
-                              Broker: "I'll include that in the proposal and outline consolidation options as well."
-                            </p>
-                          </div>
-                        </div>
-                      </>
-                    );
-                  })()}
-                </div>
+                <CallAnalysisDetail />
               </section>
             </div>
           </div>
