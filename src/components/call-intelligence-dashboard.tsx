@@ -458,7 +458,7 @@ export const CallIntelligenceDashboard: React.FC = () => {
               </div>
 
               {expandedCall === call.id && (
-                <div className="border-t border-border/60 p-4 bg-secondary">
+                <div className="border-t-[0.5px] border-border/30 p-4 bg-secondary">
                   <div className="grid grid-cols-3 gap-6">
                     <div className="space-y-4">
                       {call.propertyDetails.propertyType && (
