@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Phone, Calendar, DollarSign, Users, ChevronRight, Search, MessageSquare, Trophy, Flame, ArrowUp, ArrowDown, Award, FileText } from 'lucide-react';
+import { BrokerHeader } from "@/components/broker-header";
 
 // Minimal type hints
 type Team = {
@@ -59,40 +60,7 @@ export const ModernSalesDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <h1 className="text-2xl font-semibold text-gray-900">Broker Command Center</h1>
-            <div className="flex gap-2">
-              {(['today','prospecting','pipeline','book'] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveView(tab)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    activeView === tab ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  {tab === 'today' ? "Today's Focus" : tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <button
-              onClick={() => setShowTeamView(!showTeamView)}
-              className={`px-3 py-2 rounded-lg flex items-center gap-2 ${
-                showTeamView ? 'bg-purple-100 text-purple-700' : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <Trophy className="w-4 h-4" />
-              Team Stats
-            </button>
-            <button className="p-2 text-gray-600 hover:text-gray-900"><Calendar className="w-5 h-5" /></button>
-            <button className="p-2 text-gray-600 hover:text-gray-900"><Search className="w-5 h-5" /></button>
-          </div>
-        </div>
-      </div>
+      <BrokerHeader />
 
       {/* Personal Progress Bar */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3">
