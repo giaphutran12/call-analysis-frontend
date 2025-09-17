@@ -8,9 +8,10 @@ export const BrokerHeader = () => {
   const pathname = usePathname();
   const tabs = [
     { id: "today", label: "Today's Focus", href: "/" },
-    { id: "prospecting", label: "Prospecting", href: "/planning?tab=prospecting" },
-    { id: "pipeline", label: "Pipeline", href: "/planning?tab=pipeline" },
+    { id: "prospecting", label: "Prospecting", href: "/prospecting" },
+    { id: "pipeline", label: "Pipeline", href: "/pipeline" },
     { id: "book", label: "Book", href: "/book" },
+    { id: "intelligence", label: "Call Intelligence", href: "/intelligence" },
   ];
 
   return (
@@ -23,7 +24,9 @@ export const BrokerHeader = () => {
               const isActive =
                 (t.href === "/" && pathname === "/") ||
                 (t.href.startsWith("/book") && pathname.startsWith("/book")) ||
-                (t.href.startsWith("/planning") && pathname.startsWith("/planning"));
+                (t.href.startsWith("/prospecting") && pathname.startsWith("/prospecting")) ||
+                (t.href.startsWith("/pipeline") && pathname.startsWith("/pipeline")) ||
+                (t.href.startsWith("/intelligence") && pathname.startsWith("/intelligence"));
               return (
                 <Link
                   key={t.id}
